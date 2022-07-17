@@ -1,0 +1,107 @@
+<form [formGroup]="signupForm" (ngSubmit)="submit()">
+  <div class="error-message" *ngIf="auth.error$ | async as error">{{ error }}</div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label for="email">User Name</label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <div class="field">
+          <input id="userName"
+                 type="text"
+                 aria-describedby="name-help"
+                 class=" p-inputtext-sm"
+                 [class.ng-invalid]="signupForm.controls['name'].invalid"
+                 [class.ng-dirty]="signupForm.controls['name'].dirty"
+                 pInputText
+                 formControlName="name" />
+          <div class="validation" *ngIf="signupForm.controls['name'].invalid">
+            <small class="p-error block"
+                   *ngIf="signupForm.controls['name'].errors['required'] &&
+                   (signupForm.controls['name'].dirty || signupForm.controls['name'].touched)"
+            >Enter email</small>
+            <small class="p-error block"
+                   *ngIf="signupForm.controls['name'].errors['minlength'] &&
+                   (signupForm.controls['name'].dirty)"
+            >Minimum number of characters {{ signupForm.get('name').errors['minlength'].requiredLength }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><div class="form-control">
+    <div class="label-wrap">
+      <label for="email">Email</label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <div class="field">
+          <input id="email"
+                 type="text"
+                 aria-describedby="name-help"
+                 class=" p-inputtext-sm"
+                 [class.ng-invalid]="signupForm.controls['email'].invalid"
+                 [class.ng-dirty]="signupForm.controls['email'].dirty"
+                 pInputText
+                 formControlName="email" />
+          <div class="validation" *ngIf="signupForm.controls['email'].invalid">
+            <small class="p-error block"
+                   *ngIf="signupForm.controls['email'].errors['required'] &&
+                   (signupForm.controls['email'].dirty || signupForm.controls['email'].touched)"
+            >Enter email</small>
+            <small class="p-error block"
+                   *ngIf="signupForm.controls['email'].errors['email'] &&
+                   (signupForm.controls['email'].dirty)"
+            >Email not correct</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label for="password">Password</label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <div class="field">
+          <p-password
+            id="password"
+            class="p-inputtext-sm"
+            formControlName="password"
+            [class.ng-invalid]="signupForm.controls['password'].invalid"
+            [class.ng-dirty]="signupForm.controls['password'].dirty"
+          ></p-password>
+          <div class="validation" *ngIf="signupForm.controls['password'].invalid">
+            <small class="p-error block"
+                   *ngIf="signupForm.controls['password'].errors['required'] &&
+                   (signupForm.controls['password'].dirty || signupForm.controls['password'].touched)"
+            >Enter product name</small>
+            <small class="p-error block"
+                   *ngIf="signupForm.controls['password'].errors['minlength'] &&
+                   (signupForm.controls['password'].dirty)"
+            >Minimum number of characters {{ signupForm.get('password').errors['minlength'].requiredLength }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label for="email">Select user role</label>
+    </div>
+    <div *ngFor="let role of roles" class="p-field-checkbox">
+      <p-radioButton [inputId]="role.key"
+                     name="role"
+                     [value]="role"
+                     formControlName="role"
+      ></p-radioButton>
+      <label [for]="role.key">{{ role.name }}</label>
+    </div>
+  </div>
+  <div class="button-group">
+    <p-button label='SignUp'
+              (onClick)="submit()"
+              [disabled]="signupForm.invalid || submitted"
+    ></p-button>
+  </div>
+</form>

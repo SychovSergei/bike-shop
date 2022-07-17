@@ -1,0 +1,18 @@
+<div class="progress-bar">
+  <div class="steps-wrap">
+    <div class="step-item" *ngFor="let step of steps"
+         [class.active]="current == step.id"
+         [class.complete]="step.complete"
+    >
+      <div class="step-circle-body">
+        <div class="step-circle">
+          {{step.id}}
+        </div>
+        <div class="progress-line"></div>
+      </div>
+
+      <div class="step-name">{{step.name}}</div>
+    </div>
+
+  </div>
+</div>

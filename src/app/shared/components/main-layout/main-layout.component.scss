@@ -1,0 +1,34 @@
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+main {
+  flex: 1 1 auto;
+}
+.main {
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.content-block {
+  flex: 1 1 auto;
+  padding: 0 15px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+@media screen and (min-width: 576px) {
+  .main {
+    flex-direction: row;
+  }
+}
+@media screen and (min-width: 768px) {
+  .content-block {
+    margin-top: 20px;
+  }
+}
+

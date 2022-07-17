@@ -1,0 +1,116 @@
+<div *ngIf="product$ | async as cardDetail; else loading">
+  <div class="button-group-left" *ngIf="userService.userInfo$ | async as user">
+      <button *ngIf="user.role == 'admin' || user.role ==  'owner'"
+              class="btn btn-border"
+              type="button"
+              [pTooltip]="tooltipEdit"
+              tooltipPosition="bottom"
+              (click)="edit(cardDetail.id)"
+      >
+        <fa-icon [icon]="['fas', 'pen-square']"></fa-icon>
+      </button>
+      <button *ngIf="user.role == 'admin' || user.role ==  'owner'"
+              class="btn btn-border"
+              type="button"
+              [pTooltip]="tooltipDelete"
+              tooltipPosition="bottom"
+              (click)="remove(cardDetail.id)"
+      >
+        <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+      </button>
+  </div>
+  <div class="product-page">
+    <div class="image-slider">
+      <div class="img-main">
+        <img id="main-image" src="{{mainImgUrl}}" alt="bike_1">
+        <div class="zoom-btn">+ zoom</div>
+      </div>
+      <div class="available-color">
+        <p>{{cardDetail.color.toString() | replace : '[,]' : '/'}}</p>
+      </div>
+      <div class="img-thumbs">
+        <a href="" (click)="selectImage($event)"><img class="img-thumb active" src="{{cardDetail.imgUrl}}" alt="bike_1 thumb_1"></a>
+        <a href="" (click)="selectImage($event)"><img class="img-thumb" src="{{cardDetail.imgUrl}}" alt="bike_1 thumb_2"></a>
+        <a href="" (click)="selectImage($event)"><img class="img-thumb" src="{{cardDetail.imgUrl}}" alt="bike_1 thumb_3"></a>
+<!--        <a href="" (click)="selectImage($event)"><img class="img-thumb" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg" alt="bike_1 thumb_2"></a>-->
+      </div>
+    </div>
+    <div class="product-detail-block">
+      <div class="product-title">{{cardDetail.name}}</div>
+      <div class="product-description">
+        <p>
+          {{cardDetail.description | limitchar: prodDescrLimitChar}}
+          <a *ngIf="cardDetail.description.length > prodDescrLimitChar" (click)="toggleDescriptionView($event)" href="#">
+            <span *ngIf="!isProdDescrFull">...(Read More)</span>
+            <span *ngIf="isProdDescrFull">...(Read Less)</span>
+          </a>
+        </p>
+      </div>
+      <div class="product-price">{{cardDetail.price | currency: 'USD'}}</div>
+      <app-star-rates [rates]="cardDetail.review" [quantity]="5"></app-star-rates>
+      <form class="product-form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-control">
+          <label for="color" >Color</label>
+          <select name="color" id="color" formControlName="color" (change)="onChange()">
+            <option value="" selected disabled hidden>Select Color</option>
+            <option *ngFor="let item of cardDetail.color" value="{{item | lowercase}}">{{item}}</option>
+          </select>
+          <div class="validation"
+               *ngIf="form.get('color')!.invalid && form.get('color')!.touched"
+          >
+            <small class="error" *ngIf="form.get('color').errors['required']">
+              Please select an option
+            </small>
+          </div>
+        </div>
+        <div class="form-control">
+          <label for="size" >Size</label>
+          <select name="size" id="size" formControlName="size" (change)="onChange()">
+            <option value="" selected disabled hidden>Select Size</option>
+            <option *ngFor="let item of cardDetail.size" value="{{item | lowercase}}">{{item}}</option>
+          </select>
+          <div class="validation"
+               *ngIf="form.get('size')!.invalid && form.get('size')!.touched"
+          >
+            <small class="error" *ngIf="form.get('size')!.errors['required']">
+              Please select an option
+            </small>
+          </div>
+        </div>
+        <p class="available"><b>Availability: </b>
+          <span *ngIf="form.invalid">Please select options</span>
+          <span *ngIf="form.valid && isAvailable" style="color: green;">Yes</span>
+          <span *ngIf="form.valid && !isAvailable" style="color: red;">No</span>
+        <div class="form-control">
+          <label for="quantity">Quantity</label>
+          <input id="quantity" type="text" value="1" formControlName="quantity">
+          <div class="validation"
+               *ngIf="form.get('quantity')!.invalid && form.get('quantity')!.touched"
+          >
+            <small class="error" *ngIf="form.get('quantity')!.errors['required']">
+              Field cannot be empty
+            </small>
+            <small class="error" *ngIf="form.get('quantity')!.errors['min']">
+              Minimum quantity is 1
+            </small>
+            <small class="error" *ngIf="form.get('quantity')!.errors['max']">
+              Maximum quantity is 99
+            </small>
+            <small class="error" *ngIf="form.get('quantity')!.errors['pattern']">
+              Must be number
+            </small>
+          </div>
+        </div>
+        <button class="btn btn-color" type="submit" [disabled]="form.invalid || !isAvailable">
+          <fa-icon [icon]="['fas', 'shopping-cart']"></fa-icon>
+          Add to Cart
+        </button>
+        <button class="btn btn-border"  type="button">
+          <fa-icon [icon]="['fas', 'magic']"></fa-icon>
+          Add to Wish List
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #loading>Load product...</ng-template>

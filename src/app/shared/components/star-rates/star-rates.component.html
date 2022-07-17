@@ -1,0 +1,31 @@
+<div class="review-box">
+  <div class="stars">
+    <div class="star" *ngFor="let star of stars" id="id_{{star.num}}">
+      <fa-icon *ngIf="!star.value" [icon]="['far', 'star']"
+               (mouseenter)="mouseHover($event)"
+               (mouseleave)="mouseLeave()"
+               (click)="mouseClick($event)"
+      ></fa-icon>
+      <fa-icon *ngIf="star.value"  [icon]="['fas', 'star']"
+               (mouseleave)="mouseLeave()"
+               (click)="mouseClick($event)"
+      ></fa-icon>
+    </div>
+    <a href="#" (click)="test($event)"><span *ngIf="rates">({{ rates.length }})</span></a>
+  </div>
+  <div class="review-links">
+    <div class="read-review">
+      <p>
+        <a *ngIf="rates" href="#" (click)="test($event)">
+          Read {{rates.length}}
+          <span *ngIf="rates.length > 1; else altText">Reviews</span>
+          <ng-template #altText>Review</ng-template>
+        </a>
+      </p>
+    </div>
+    <div class="write-review">
+      <a href="#" (click)="test($event)">Write a Review</a>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,169 @@
+.order-page {
+  max-width: 500px;
+  margin: 0 auto;
+
+  .order-form {
+    display: flex;
+    flex-direction: column;
+
+    .form-content {
+      .step-body {
+        .step-title {
+          h2 {
+            margin: 10px 0 15px;
+          }
+        }
+        .form-control {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 15px;
+          label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+          }
+          select {
+            width: 100%;
+            height: 30px;
+            font-size: 14px;
+            margin-top: 5px;
+            option {
+              padding: 25px;
+              border-bottom: 1px solid red;
+            }
+            &.ng-invalid.ng-touched {
+              border: 1px solid red;
+            }
+            &:focus {
+              border: 1px solid #255c86;
+              box-shadow: 0 0 5px #255c86;
+            }
+          }
+          input, input[type=date] {
+            height: 30px;
+            width: 100%;
+            //max-width: 150px;
+            padding: 0 10px;
+            font-size: 14px;
+            //margin-top: 10px;
+            &.ng-invalid.ng-touched {
+              border: 1px solid red;
+            }
+            &:focus {
+              border: 1px solid red;
+              box-shadow: 0 0 5px #255c86;
+            }
+            &:focus-visible {
+              border: 2px solid #255c86;
+              box-shadow: 0 0 5px #255c86;
+              outline: 2px;
+            }
+          }
+          .form-radio-group {
+            display: inline-block;
+            overflow: hidden;
+            margin: 0 auto 15px;
+            .form-radio-group-item {
+              display: inline-block;
+              float: left;
+            }
+            input[type=radio] {
+              display: none;
+            }
+            label {
+              display: inline-block;
+              cursor: pointer;
+              padding: 0 15px;
+              line-height: 34px;
+              border: 1px solid #999;
+              border-right: none;
+              user-select: none;
+              min-width: 100px;
+              text-align: center;
+            }
+            input[type=radio]:checked + label {
+              background: #82c162;
+              color: white;
+            }
+            label:hover {
+              color: #666;
+            }
+            .form-radio-group-item:first-child label {
+              border-radius: 6px 0 0 6px;
+            }
+            .form-radio-group-item:last-child label {
+              border-radius: 0 6px 6px 0;
+              border-right: 1px solid #999;
+            }
+          }
+          .form-radio {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 300px;
+            margin: 10px 15px;
+            input[type=radio] {
+              width: 20px;
+            }
+            label {
+              margin-bottom: 0;
+              margin-left: 10px;
+            }
+          }
+          .item {
+            margin-bottom: 15px;
+            .item-title {
+              font-size: 16px;
+              font-weight: bold;
+              margin-bottom: 5px;
+            }
+            .item-value {
+              font-size: 16px;
+              margin-bottom: 7px;
+            }
+          }
+        }
+      }
+    }
+    //.error {
+    //  color: red;
+    //}
+    .available {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+  }
+  .button-group {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    .btn {
+      width: 150px;
+      align-self: flex-end;
+      &.btn-prev {
+        display: flex;
+        justify-content: center;
+        margin-right: auto;
+      }
+      &.btn-next {
+        display: flex;
+        justify-content: center;
+        margin-left: auto;
+      }
+    }
+  }
+  @media only screen and (min-width: 576px) {
+    .form-control {
+      label {
+        font-size: 16px;
+      }
+    }
+    .order-form {
+      min-height: 450px;
+      padding: 0 15px;
+    }
+    .button-group {
+      flex-grow: 1;
+    }
+  }
+}

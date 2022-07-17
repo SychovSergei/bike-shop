@@ -1,0 +1,54 @@
+<div class="navigation">
+  <div class="nav-menu-wrapper">
+    <ul class="nav-menu-list">
+      <div *ngIf="auth.user$ | async as user">
+        <p *ngIf="userService.userInfo$ | async as userInfo">Welcome,
+          <span>{{ (user.providerData[0].displayName) ? user.providerData[0].displayName : userInfo.displayName}}</span>
+          <span *ngIf="(auth.user$ && userService.userInfo$) | async as userRole"> ({{ userRole.role }})</span>
+        </p>
+      </div>
+
+      <li class="nav-menu-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <div class="icon-menu icon-home"></div>
+        <a [routerLink]="['/']">Home</a>
+      </li>
+
+      <li class="nav-menu-item" routerLinkActive="active">
+        <div class="icon-menu icon-contact"></div>
+        <a [routerLink]="['/contact']">Contact</a>
+      </li>
+
+      <li *ngIf="auth.user$ | async" class="nav-menu-item" routerLinkActive="active">
+        <div class="icon-menu icon-about"></div>
+        <a [routerLink]="['/order']">Order</a>
+      </li>
+
+      <div *ngIf="(auth.user$ && userService.userInfo$) | async as user">
+        <li *ngIf="user.role=='admin'" class="nav-menu-item" routerLinkActive="active">
+          <div class="icon-menu icon-about"></div>
+          <a [routerLink]="['/create-product']">Create Product</a>
+        </li>
+      </div>
+
+      <li *ngIf="!(auth.user$ | async)" class="nav-menu-item" routerLinkActive="active">
+        <div class="icon-menu icon-contact"></div>
+        <a (click)="showModalDialog()">Login</a>
+      </li>
+      <li *ngIf="auth.user$ | async" class="nav-menu-item">
+        <div class="icon-menu icon-contact"></div>
+        <a [routerLink]="['/login']" (click)="logout()">Logout</a>
+      </li>
+      <p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '600px'}"
+                [draggable]="false" [resizable]="false">
+        <p-tabView>
+          <p-tabPanel header="Login" [headerStyle]='{"width": "50%"}'>
+            <app-login-page (success)="displayModal=false"></app-login-page>
+          </p-tabPanel>
+          <p-tabPanel header="Register" [headerStyle]='{"width": "50%"}'>
+            <app-signup-page (success)="displayModal=false"></app-signup-page>
+          </p-tabPanel>
+        </p-tabView>
+      </p-dialog>
+    </ul>
+  </div>
+</div>

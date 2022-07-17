@@ -1,0 +1,25 @@
+.related-links {
+  padding: 0 15px;
+  min-height: 50px;
+  max-width: 200px;
+}
+@media screen and (min-width: 576px) {
+  .related-links {
+    min-width: 150px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .related-links {
+    min-width: 200px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .related-links {
+    min-width: 220px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .related-links {
+    min-width: 250px;
+  }
+}

@@ -1,0 +1,78 @@
+form {
+  max-width: 500px;
+  margin-right: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+
+  //border: 1px solid red;
+}
+.title {
+  font-size: 20px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.box-wrap {
+  //display: -webkit-box;
+  display: inline-flex;
+  //flex-direction: column;
+  width: 100%;
+  flex-wrap: wrap;
+  //border: 1px solid green;
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    padding: 0 10px;
+
+    label {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input {
+      height: 30px;
+      width: 100%;
+      //max-width: 150px;
+      padding: 0 10px;
+      font-size: 14px;
+      margin-bottom: 0;
+      //margin-top: 10px;
+      &.ng-invalid.ng-touched {
+        border: 1px solid red;
+      }
+      &:focus {
+        border: 1px solid red;
+        box-shadow: 0 0 5px #255c86;
+      }
+      &:focus-visible {
+        border: 2px solid #255c86;
+        box-shadow: 0 0 5px #255c86;
+        outline: 2px;
+      }
+    }
+    .error {
+      color: red;
+    }
+
+  }
+}
+.button-group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0 10px;
+  button {
+    max-width: 150px;
+  }
+}
+.width-50 {
+  width: 100%;
+}
+.width-100 {
+  width: 100%;
+}
+@media only screen and (min-width: 992px) {
+  .width-50 {
+    width: 50%;
+  }
+}

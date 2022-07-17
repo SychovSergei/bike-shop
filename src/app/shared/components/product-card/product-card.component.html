@@ -1,0 +1,42 @@
+<div
+  [class.top-deal]="card.main" class="card-item">
+  <a
+    [routerLink]="['/product-details', card.id]"
+    href="#"
+    class="card-content color-red"
+    [class.color-red]="card.discount > 70"
+    [class.color-pink]="card.discount > 50 && card.discount <= 70"
+    [class.color-orange]="card.discount <= 50"
+  >
+    <div class="count-off">
+      <div class="circle">
+        <p>{{card.discount}}%<br>off</p>
+      </div>
+    </div>
+    <div class="child content-description">
+      <p><span class="card-name">{{card.name}}</span> {{card.description | limitchar: 35}}</p>
+    </div>
+    <div class="child card-img">
+      <img src="{{card.imgUrl}}" alt="">
+    </div>
+    <div class="child content-price">
+      <div class="price-count">
+        <div class="new-price">{{ getDiscount() | currency: 'EUR'}}</div>
+        <div class="old-price">{{card.price | currency: 'EUR'}}</div>
+      </div>
+      <div class="shop-name">{{card.shop}}</div>
+    </div>
+    <div class="child content-features">
+      <div class="features-item shipping" *ngIf="card.shipping">
+        <p>{{card.shipping}}</p>
+      </div>
+      <div class="features-item new" *ngIf="card.new">
+        <p>New</p>
+      </div>
+      <div class="features-item timer" *ngIf="getDifferenceTime().hidden">
+        <p *ngIf="getDifferenceTime().days">{{getDifferenceTime().days}} day(s)</p>
+        <p>{{getDifferenceTime().times}}</p>
+      </div>
+    </div>
+  </a>
+</div>

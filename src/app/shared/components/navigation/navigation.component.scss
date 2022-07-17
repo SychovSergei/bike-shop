@@ -1,0 +1,72 @@
+.navigation {
+  padding: 20px 15px;
+  margin: 0;
+  background: var(--main-color2);
+}
+
+.nav-menu-wrapper {
+  .nav-menu-list li.nav-menu-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    list-style-type: none;
+    a {
+      text-decoration: none;
+      font-size: 20px;
+      color: #fff;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .icon-menu {
+      min-width: 60px;
+      height: 60px;
+      background-color: var(--main-color2);
+    }
+    &.active {
+      background-color: var(--main-color2);
+      a {color: white;}
+      .icon-menu {
+        background-color: white;
+      }
+    }
+  }
+}
+
+.icon-home {
+  mask: url(../../../../assets/img/home-page.svg) no-repeat center / contain;
+  -webkit-mask: url(../../../../assets/img/home-page.svg#star) no-repeat center;
+}
+.icon-about {
+  mask: url(../../../../assets/img/about.svg) no-repeat center / contain;
+  -webkit-mask: url(../../../../assets/img/about.svg#star) no-repeat center;
+}
+.icon-contact {
+  mask: url(../../../../assets/img/contact.svg) no-repeat center / contain;
+  -webkit-mask: url(../../../../assets/img/contact.svg#star) no-repeat center;
+}
+
+@media screen and (min-width: 576px) {
+  .navigation {
+    min-width: 150px;
+    background: #fff;
+  }
+  .nav-menu-wrapper .nav-menu-list li.nav-menu-item a {
+    color: #82c162;
+  }
+}
+@media screen and (min-width: 768px) {
+  .navigation {
+    min-width: 200px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .navigation {
+    min-width: 220px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .navigation {
+    min-width: 250px;
+  }
+}

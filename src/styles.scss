@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --main-color1: #255c85;
+  --main-color2: #82c162;
+  --card-height: 230px;
+  --height-features: 30px;
+  --height-price: 40px;
+  --height-description: 85px;
+  --card-main-color-red: red;
+  --card-main-color-pink: pink;
+  --card-main-color-orange: orange;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  margin: 0;
+}
+.btn {
+  font-size: 16px;
+  padding: 7px 22px;
+  margin: 10px 0;
+  max-width: 200px;
+  border-radius: 3px;
+  &:hover:disabled {
+    cursor: default;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+
+}
+.btn-color {
+  background-color: var(--main-color1);
+  color: white;
+
+  &:disabled {
+    filter: grayscale(50%) brightness(1.7);
+  }
+}
+.btn-border {
+  border: 1px solid var(--main-color1);
+  color: var(--main-color1);
+  background-color: white;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}

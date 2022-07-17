@@ -1,0 +1,88 @@
+
+<form (ngSubmit)="onSubmit()" #f="ngForm">
+  <h3 class="title">Contact with us</h3>
+  <div id="contact-info" class="box-wrap" ngModelGroup="userContact">
+    <div class="form-control width-50">
+      <label for="name1" >Name</label>
+      <input type="text"
+             id="name1"
+             class="form-control"
+             ngModel
+             name="name"
+             #name="ngModel"
+             required
+             minlength="2"
+      >
+      <div class="validation" *ngIf="name.invalid && name.touched">
+        <small class="error" *ngIf="name.touched && name.errors['required']">
+          Enter value
+        </small>
+        <small class="error" *ngIf="name.touched && name.errors['minlength']">
+          Minimum number of characters {{name.errors['minlength'].requiredLength}}
+        </small>
+      </div>
+    </div>
+    <div class="form-control width-50">
+      <label for="surename" >Sure name</label>
+      <input type="text"
+             id="surename"
+             class="form-control"
+             ngModel
+             name="surename"
+             #surename="ngModel"
+             required
+             minlength="2"
+      >
+      <div class="validation" *ngIf="surename.invalid && surename.touched">
+        <small class="error" *ngIf="surename.touched && surename.errors['required']">
+          Enter value
+        </small>
+        <small class="error" *ngIf="surename.touched && surename.errors['minlength']">
+          Minimum number of characters {{surename.errors['minlength'].requiredLength}}
+        </small>
+      </div>
+    </div>
+    <div class="form-control width-100">
+      <label for="email" >Email</label>
+      <input type="text"
+             id="email"
+             class="form-control"
+             ngModel
+             name="email"
+             #email="ngModel"
+             required
+             email
+      >
+      <div class="validation" *ngIf="email.invalid && email.touched">
+        <small class="error">
+          Enter valid email
+        </small>
+      </div>
+    </div>
+    <div class="form-control width-100">
+      <label for="description" >Description</label>
+      <input type="text"
+             id="description"
+             class="form-control"
+             ngModel
+             name="description"
+             #decription="ngModel"
+             required
+             minlength="5"
+      >
+      <div class="validation" *ngIf="decription.invalid && decription.touched">
+        <small class="error" *ngIf="decription.touched && decription.errors['required']">
+          Enter value
+        </small>
+        <small class="error" *ngIf="decription.touched && decription.errors['minlength']">
+          Minimum number of characters {{decription.errors['minlength'].requiredLength}}
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="button-group">
+    <button class="btn btn-color" type="submit" [disabled]="!f.valid">Send</button>
+  </div>
+
+</form>
+

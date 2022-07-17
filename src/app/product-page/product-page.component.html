@@ -1,0 +1,17 @@
+<h1>{{ title }}</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab accusantium aliquid cumque, deserunt
+  dignissimos distinctio dolor dolore, dolorem dolores ea eaque eligendi et, facilis fugiat harum id illo
+  impedit laboriosam laborum libero mollitia nam nostrum officiis optio porro quaerat quia quisquam quod
+  recusandae repudiandae vel veritatis vero voluptatem voluptatum!</p>
+<div *ngIf="products$ | async as cards; else loading">
+  <div class="card-container">
+    <app-product-card
+      *ngFor="let card of cards"
+      [card]="card"
+    ></app-product-card>
+  </div>
+</div>
+<ng-template #loading>
+  <p style="text-align: center;">Loading...</p>
+</ng-template>
+

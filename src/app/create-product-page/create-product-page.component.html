@@ -1,0 +1,259 @@
+<form [formGroup]="productForm" (ngSubmit)="submit()">
+  <div class="form-control">
+    <div class="label-wrap">
+      <label for="name" >Product name<span class="required-asterisk">*</span></label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <div class="field">
+          <input id="name"
+                 type="text"
+                 aria-describedby="name-help"
+                 class=" p-inputtext-sm"
+                 [class.ng-invalid]="productForm.controls['name'].invalid"
+                 [class.ng-dirty]="productForm.controls['name'].dirty"
+                 pInputText
+                 formControlName="name" />
+          <div class="validation" *ngIf="productForm.controls['name'].invalid">
+            <small class="p-error block"
+                   *ngIf="productForm.controls['name'].errors['required'] &&
+                   (productForm.controls['name'].dirty || productForm.controls['name'].touched)"
+            >Enter product name</small>
+            <small class="p-error block"
+                   *ngIf="productForm.controls['name'].errors['minlength'] &&
+                   (productForm.controls['name'].dirty)"
+            >Minimum number of characters {{ productForm.get('name').errors['minlength'].requiredLength }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label for="price">Price<span class="required-asterisk">*</span></label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <p-inputNumber id="price"
+                       formControlName="price"
+                       mode="decimal"
+                       [minFractionDigits]="2" [maxFractionDigits]="2"
+                       class="p-inputtext-sm"
+        ></p-inputNumber>
+      </div>
+      <div class="validation" *ngIf="productForm.controls['price'].invalid">
+        <small class="p-error block"
+               *ngIf="productForm.controls['price'].errors['required'] &&
+               (productForm.controls['price'].dirty || productForm.controls['price'].touched)"
+        >Enter price value</small>
+        <small class="p-error block"
+               *ngIf="productForm.controls['price'].errors['min'] &&
+                   (productForm.controls['price'].dirty || productForm.controls['price'].touched)"
+        >Enter a value greater than 0</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <div class="label-wrap">
+      <label>Main</label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <p-selectButton [options]="main"
+                        optionLabel="label"
+                        optionValue="value"
+                        formControlName="main"
+                        class="p-inputtext-sm"></p-selectButton>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label>Shop<span class="required-asterisk">*</span></label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <p-dropdown [options]="shopList"
+                    optionLabel="name"
+                    [optionValue]="name"
+                    formControlName="shop"
+                    placeholder="Select a shop"
+                    [showClear]="true"
+                    class="p-inputtext-sm"></p-dropdown>
+      </div>
+      <div class="validation" *ngIf="productForm.controls['shop'].invalid">
+        <small class="p-error block"
+               *ngIf="productForm.controls['shop'].errors['required'] &&
+               (productForm.controls['shop'].dirty || productForm.controls['shop'].touched)"
+        >Please select an option</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label >Description<span class="required-asterisk">*</span></label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <textarea rows="5" cols="30" pInputTextarea
+                  formControlName="description"
+                  class="p-inputtext-sm"
+        ></textarea>
+      </div>
+      <div class="validation" *ngIf="productForm.controls['description'].invalid">
+        <small class="p-error block"
+               *ngIf="productForm.controls['description'].errors['required'] &&
+               (productForm.controls['description'].dirty || productForm.controls['description'].touched)"
+        >Enter description value</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label >Shipping</label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <p-dropdown [options]="shipping"
+                    optionLabel="name"
+                    [optionValue]="name"
+                    formControlName="shipping"
+                    placeholder="Select a shipping option"
+                    [showClear]="true"
+                    class="p-inputtext-sm"></p-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label for="discount">Discount</label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <p-inputNumber id="discount"
+                       formControlName="discount"
+                       mode="decimal"
+                       [minFractionDigits]="2" [maxFractionDigits]="2"
+                       class="p-inputtext-sm"
+        ></p-inputNumber>
+      </div>
+      <div class="validation" *ngIf="productForm.controls['discount'].invalid">
+        <small class="p-error block"
+               *ngIf="productForm.controls['discount'].errors['required'] &&
+               (productForm.controls['discount'].dirty || productForm.controls['discount'].touched)"
+        >Enter discount value</small>
+        <small class="p-error block"
+               *ngIf="productForm.controls['discount'].errors['min'] &&
+               (productForm.controls['discount'].dirty || productForm.controls['discount'].touched)"
+        >Enter a value greater than 0</small>
+        <small class="p-error block"
+               *ngIf="productForm.controls['discount'].errors['max'] &&
+               (productForm.controls['discount'].dirty || productForm.controls['discount'].touched)"
+        >Enter a value less than 100</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label >Discount Until<span class="required-asterisk">*</span></label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <p-calendar [showTime]="true"
+                    [showSeconds]="true"
+                    inputId="time"
+                    formControlName="discountUntil"
+                    [minDate]="minDateValue"
+                    [readonlyInput]="true"
+                    class="p-inputtext-sm"
+        ></p-calendar>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label>New</label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <p-inputSwitch formControlName="new" class="p-inputtext-sm"></p-inputSwitch>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label >Color<span class="required-asterisk">*</span></label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <p-multiSelect [options]="colorList"
+                       optionLabel="name"
+                       [optionValue]="name"
+                       formControlName="color"
+                       class="p-inputtext-sm"
+        ></p-multiSelect>
+      </div>
+      <div class="validation" *ngIf="productForm.controls['color'].invalid">
+        <small class="p-error block"
+               *ngIf="productForm.controls['color'].touched"
+        >Select color</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label >Size<span class="required-asterisk">*</span></label>
+    </div>
+    <div class="item-input">
+      <div class="item-input-content">
+        <p-multiSelect [options]="sizeList"
+                       optionLabel="name"
+                       [optionValue]="name"
+                       formControlName="size"
+                       class="p-inputtext-sm"
+        ></p-multiSelect>
+      </div>
+      <div class="validation" *ngIf="productForm.controls['size'].invalid">
+        <small class="p-error block"
+               *ngIf="productForm.controls['size'].touched"
+        >Select color</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-control">
+    <div class="label-wrap">
+      <label for="image">Load image</label>
+    </div>
+    <div class="item-input">
+      <p-toast></p-toast>
+      <div class="card" >
+        <p-fileUpload
+          id="image"
+          name="myfile[]"
+          url="./upload.php"
+          (onUpload)="onUpload($event)"
+          accept="image/*" method="post"
+          formControlName="imgUrl"
+          ngDefaultControl
+        >
+          <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+              <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+      </div>
+    </div>
+  </div>
+  <div class="button-group">
+    <p-button label="Create"
+              (onClick)="submit()"
+              [disabled]="productForm.invalid"
+    ></p-button>
+  </div>
+
+</form>
+
+
+

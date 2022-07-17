@@ -1,0 +1,79 @@
+form {
+  max-width: 650px;
+  margin: 0 auto;
+}
+.form-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: flex-start;
+  //border: 2px solid red;
+  margin-top: 15px !important;
+
+  .label-wrap {
+    min-height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    label {
+      margin-right: 15px;
+      //height: 50px;
+      //border: 1px solid green;
+    }
+  }
+
+  .item-input {
+    //border: 1px solid blue;
+    width: 100%;
+    .item-input-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      //min-height: 40px;
+
+      input[pInputText],
+      input[pPassword],
+      p-inputNumber,
+      p-selectButton,
+      p-dropdown, textarea, p-calendar, p-password,
+      p-multiSelect {
+        width: 100%;
+        max-width: 300px;
+      }
+
+    }
+  }
+  .error {
+    color: red;
+  }
+  .required-asterisk {
+    color: red;
+  }
+
+  @media only screen and (min-width: 992px) {
+    flex-direction: row;
+
+    .label-wrap {
+      min-height: 50px;
+      width: 30%;
+    }
+    .item-input {
+      width: 70%;
+      .item-input-content {
+        min-height: 50px;
+      }
+    }
+  }
+
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+.error-message {
+  background-color: rgb(255, 207, 207);
+  padding: 15px;
+}

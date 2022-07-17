@@ -1,0 +1,221 @@
+<div class="order-page">
+  <form action="" class="order-form" [formGroup]="orderForm">
+    <app-progress-bar
+      [steps] = "steps"
+      [current]="currentStep"
+    ></app-progress-bar>
+    <div class="form-content" [ngSwitch]="currentStep">
+      <div class="step-body" *ngSwitchCase="1" formGroupName="productInfo">
+        <div class="step-title">
+          <h2>Step 1 - Select product</h2>
+        </div>
+        <div class="step-content">
+          <div class="form-control">
+            <label for="product">Product</label>
+            <select name="product" id="product" formControlName="productId" (change)="getDescription($event)">
+              <option value="" selected disabled hidden>Select product</option>
+              <option selected *ngFor="let card of cards" value="{{card.id}}">{{card.name}}</option>
+            </select>
+            <div class="validation"
+                 *ngIf="orderForm.controls['productInfo'].invalid && orderForm.controls['productInfo'].get('productId').touched"
+            >
+              <small class="error">
+                Please select an option
+              </small>
+            </div>
+          </div>
+          <div class="description">
+            <p>{{prodDescription}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="step-body" *ngSwitchCase="2" formGroupName="deliveryAddress">
+        <div class="step-title">
+          <h2>Step 2 - Delivery address</h2>
+        </div>
+        <div class="step-content">
+          <div class="form-control">
+            <label for="country" >Country</label>
+            <input name="country" id="country" formControlName="country">
+            <div class="validation"
+                 *ngIf="orderForm.get('deliveryAddress').get('country').invalid &&
+                        orderForm.get('deliveryAddress').get('country').touched"
+            >
+              <small class="error" *ngIf="orderForm.get('deliveryAddress').get('country').errors['required']">
+                Enter value
+              </small>
+              <small class="error" *ngIf="orderForm.get('deliveryAddress').get('country').errors['minlength']">
+                Minimum number of characters {{orderForm.get('deliveryAddress').get('country').errors['minlength'].requiredLength}}
+              </small>
+            </div>
+          </div>
+          <div class="form-control">
+            <label for="city" >City</label>
+            <input name="city" id="city" formControlName="city">
+            <div class="validation"
+                 *ngIf="orderForm.get('deliveryAddress').get('city').invalid &&
+                        orderForm.get('deliveryAddress').get('city').touched"
+            >
+              <small class="error" >
+                Enter value
+              </small>
+              <small class="error" *ngIf="orderForm.get('deliveryAddress').get('city').errors['minlength']">
+                Minimum number of characters {{orderForm.get('deliveryAddress').get('city').errors['minlength'].requiredLength}}
+              </small>
+            </div>
+          </div>
+          <div class="form-control">
+            <label for="address" >Address</label>
+            <input name="address" id="address" formControlName="address">
+            <div class="validation"
+                 *ngIf="orderForm.get('deliveryAddress').get('address').invalid && orderForm.get('deliveryAddress').get('address').touched"
+            >
+              <small class="error" >
+                Enter value
+              </small>
+              <small class="error" *ngIf="orderForm.get('deliveryAddress').get('address').errors['minlength']">
+                Minimum number of characters {{orderForm.get('deliveryAddress').get('address').errors['minlength'].requiredLength}}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-body" *ngSwitchCase="3" formGroupName="paymentMethod">
+        <div class="step-title">
+          <h2>Step 3 - Payment method</h2>
+        </div>
+        <div class="step-content">
+          <div class="form-control">
+            <div class="form-radio-group">
+              <div class="form-radio-group-item">
+                <input id="card"
+                       type="radio"
+                       name="payment"
+                       value="card"
+                       formControlName="payment">
+                <label for="card">Card</label>
+              </div>
+              <div class="form-radio-group-item">
+                <input id="paypal"
+                       type="radio"
+                       name="payment"
+                       value="paypal"
+                       formControlName="payment">
+                <label for="paypal">PayPal</label>
+              </div>
+              <div class="form-radio-group-item">
+                <input id="cash"
+                       type="radio"
+                       name="payment"
+                       value="cash"
+                       formControlName="payment">
+                <label for="cash">Cash</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-body" *ngSwitchCase="4" formGroupName="deliveryDate">
+        <div class="step-title">
+          <h2>Step 4 - Date of delivery</h2>
+        </div>
+        <div class="step-content">
+          <div class="form-control">
+            <div class="form-radio-group">
+              <div class="form-radio-group-item">
+                <input id="today"
+                       type="radio"
+                       value = "{{today}}"
+                       formControlName="date"
+                >
+                <label for="today">Today</label>
+              </div>
+              <div class="form-radio-group-item">
+                <input id="tomorrow"
+                       type="radio"
+                       value = "{{tomorrow}}"
+                       formControlName="date"
+                >
+                <label for="tomorrow">Tomorrow</label>
+              </div>
+              <div class="form-radio-group-item">
+                <input id="fromCalendar"
+                       type="radio"
+                       value="{{calendarValue}}"
+                       formControlName="date"
+                >
+                <label for="fromCalendar">Choose date from calendar</label>
+              </div>
+            </div>
+            <input type="date"
+                   min="{{calendarMinValue}}"
+                   value = "{{calendarValue}}"
+                   (input)="updateDate($event)"
+                   [style.visibility]="viewCalendar"
+            >
+            <div class="validation"
+                 *ngIf="orderForm.get('deliveryDate').get('date').invalid && orderForm.get('deliveryDate').get('date').dirty"
+            >
+              <small class="error" *ngIf="orderForm.get('deliveryDate').get('date').errors['required']">
+                Date required
+              </small>
+              <small class="error" *ngIf="orderForm.get('deliveryDate').get('date').errors['restrictdate']">
+                We can't deliver yesterday
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-body" *ngSwitchCase="5">
+        <div class="step-title">
+          <h2>Step 5 - Summarize Info</h2>
+        </div>
+        <div class="step-content">
+          <div class="form-control">
+            <div class="item">
+              <div class="item-title">Product name</div>
+              <div class="item-value">{{prodName}}</div>
+            </div>
+            <div class="item">
+              <div class="item-title">Delivery address</div>
+              <div class="item-value">Country: {{orderForm.get('deliveryAddress').get('country').value}}</div>
+              <div class="item-value">City: {{orderForm.get('deliveryAddress').get('city').value}}</div>
+              <div class="item-value">Address: {{orderForm.get('deliveryAddress').get('address').value}}</div>
+            </div>
+            <div class="item">
+              <div class="item-title">Payment method</div>
+              <div class="item-value">{{orderForm.get('paymentMethod').get('payment').value | titlecase}}</div>
+            </div>
+            <div class="item">
+              <div class="item-title">Date of delivery</div>
+              <div class="item-value">{{orderForm.get('deliveryDate').get('date').value | date: 'longDate'}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-group">
+      <button
+        class="btn btn-prev"
+        (click)="prevStep()"
+        *ngIf=" currentStep > 1"
+      >Previous</button>
+      <button
+        class="btn btn-next"
+        (click)="nextStep()"
+        *ngIf="currentStep < 5"
+        [disabled]="(currentStep == 1 && orderForm.controls['productInfo'].invalid) ||
+                    (currentStep == 2 && orderForm.controls['deliveryAddress'].invalid) ||
+                    (currentStep == 3 && orderForm.controls['paymentMethod'].invalid) ||
+                    (currentStep == 4 && orderForm.controls['deliveryDate'].invalid)"
+      >Next</button>
+      <button
+        class="btn btn-color"
+        (click)="submit()"
+        *ngIf="currentStep == 5"
+        [disabled]="orderForm.invalid"
+      >Submit</button>
+    </div>
+<!--        <pre *ngIf="viewFinal">{{orderForm.value | json}}</pre>-->
+  </form>
+</div>

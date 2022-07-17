@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ng-complete-guide-b4e7f": {
+      "hosting": {
+        "angular": [
+          "ng-complete-guide-b4e7f"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ng-complete-guide-b4e7f"
+  }
+}
