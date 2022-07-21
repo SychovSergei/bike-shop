@@ -10,7 +10,7 @@ import {Title} from "@angular/platform-browser";
 export class ContactPageComponent implements OnInit {
 
   title="Contacts"
-  address = "Kharkiv, Kharkivs'ka oblast, 61000, Biblyka St, 48"
+  address = "Kremenchuk, 39600, Poltavska"
 
 
   constructor(private titleService: Title) {
@@ -29,17 +29,17 @@ export class ContactPageComponent implements OnInit {
 }
 
 function initMap() {
-  const myLatLng = { lat: 49.94047, lng: 36.39337 };
+  const myLatLng = { lat: 49.06297, lng: 33.39978 };
   const map = new google.maps.Map(
     document.getElementById("map") as HTMLElement,
     {
-      zoom: 12,
+      zoom: 16,
       center: myLatLng,
     });
 
   new google.maps.Marker({
     position: myLatLng,
     map,
-    title: "Zelenyy Hay Park",
+    title: "Prydniprovskii Park",
   });
 }
