@@ -7,8 +7,7 @@ form {
   flex-direction: column;
   justify-content: left;
   align-items: flex-start;
-  //border: 2px solid red;
-  margin-top: 15px !important;
+  margin-top: 15px;
 
   .label-wrap {
     min-height: 40px;
@@ -18,30 +17,15 @@ form {
     align-items: center;
     label {
       margin-right: 15px;
-      //height: 50px;
-      //border: 1px solid green;
     }
   }
 
   .item-input {
-    //border: 1px solid blue;
     width: 100%;
     .item-input-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      //min-height: 40px;
-
-      input[pInputText],
-      input[pPassword],
-      p-inputNumber,
-      p-selectButton,
-      p-dropdown, textarea, p-calendar, p-password,
-      p-multiSelect {
-        width: 100%;
-        max-width: 300px;
-      }
-
     }
   }
   .error {
@@ -50,10 +34,11 @@ form {
   .required-asterisk {
     color: red;
   }
+}
 
-  @media only screen and (min-width: 992px) {
+@media only screen and (min-width: 768px) {
+  .form-control {
     flex-direction: row;
-
     .label-wrap {
       min-height: 50px;
       width: 30%;
@@ -65,15 +50,23 @@ form {
       }
     }
   }
-
 }
-
-.button-group {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 20px;
+.button-group-wrap {
+  margin-top: 35px;
+  .button-group {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 20px;
+    p-button {
+      width: 100%;
+    }
+  }
 }
 .error-message {
   background-color: rgb(255, 207, 207);
   padding: 15px;
+}
+:host ::ng-deep .p-button {
+  width: 100%;
 }

@@ -38,7 +38,7 @@
         <div class="icon-menu icon-contact"></div>
         <a [routerLink]="['/login']" (click)="logout()">Logout</a>
       </li>
-      <p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '600px'}"
+      <p-dialog [(visible)]="displayModal" [modal]="true" [style]="{width: '600px'}"
                 [draggable]="false" [resizable]="false">
         <p-tabView>
           <p-tabPanel header="Login" [headerStyle]='{"width": "50%"}'>

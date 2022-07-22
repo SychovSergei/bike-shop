@@ -2,29 +2,27 @@
   <div class="error-message" *ngIf="auth.error$ | async as error">{{ error }}</div>
   <div class="form-control">
     <div class="label-wrap">
-      <label for="email">Login</label>
+      <label for="email">Email</label>
     </div>
     <div class="item-input">
       <div class="item-input-content">
-        <div class="field">
-          <input id="email"
-                 type="text"
-                 aria-describedby="name-help"
-                 class=" p-inputtext-sm"
-                 [class.ng-invalid]="loginForm.controls['email'].invalid"
-                 [class.ng-dirty]="loginForm.controls['email'].dirty"
-                 pInputText
-                 formControlName="email" />
-          <div class="validation" *ngIf="loginForm.controls['email'].invalid">
-            <small class="p-error block"
-                   *ngIf="loginForm.controls['email'].errors['required'] &&
-                   (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)"
-            >Enter email</small>
-            <small class="p-error block"
-                   *ngIf="loginForm.controls['email'].errors['minlength'] &&
-                   (loginForm.controls['email'].dirty)"
-            >Minimum number of characters {{ loginForm.get('email').errors['minlength'].requiredLength }}</small>
-          </div>
+        <input id="email"
+               type="text"
+               aria-describedby="name-help"
+               class=" p-inputtext-sm"
+               [class.ng-invalid]="loginForm.controls['email'].invalid"
+               [class.ng-dirty]="loginForm.controls['email'].dirty"
+               pInputText
+               formControlName="email" />
+        <div class="validation" *ngIf="loginForm.controls['email'].invalid">
+          <small class="p-error block"
+                 *ngIf="loginForm.controls['email'].errors['required'] &&
+                 (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)"
+          >Enter email</small>
+          <small class="p-error block"
+                 *ngIf="loginForm.controls['email'].errors['minlength'] &&
+                 (loginForm.controls['email'].dirty)"
+          >Minimum number of characters {{ loginForm.get('email').errors['minlength'].requiredLength }}</small>
         </div>
       </div>
     </div>
@@ -35,39 +33,37 @@
     </div>
     <div class="item-input">
       <div class="item-input-content">
-        <div class="field">
-          <p-password
-            id="password"
-            class="p-inputtext-sm"
-            formControlName="password"
-            [class.ng-invalid]="loginForm.controls['password'].invalid"
-            [class.ng-dirty]="loginForm.controls['password'].dirty"
-
-          ></p-password>
-          <div class="validation" *ngIf="loginForm.controls['password'].invalid">
-            <small class="p-error block"
-                   *ngIf="loginForm.controls['password'].errors['required'] &&
-                   (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
-            >Enter product name</small>
-            <small class="p-error block"
-                   *ngIf="loginForm.controls['password'].errors['minlength'] &&
-                   (loginForm.controls['password'].dirty)"
-            >Minimum number of characters {{ loginForm.get('password').errors['minlength'].requiredLength }}</small>
-          </div>
+        <input type="password" pPassword
+               id="password"
+               class="p-inputtext-sm"
+               formControlName="password"
+               [class.ng-invalid]="loginForm.controls['password'].invalid"
+               [class.ng-dirty]="loginForm.controls['password'].dirty"
+        />
+        <div class="validation" *ngIf="loginForm.controls['password'].invalid">
+          <small class="p-error block"
+                 *ngIf="loginForm.controls['password'].errors['required'] &&
+                 (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
+          >Enter product name</small>
+          <small class="p-error block"
+                 *ngIf="loginForm.controls['password'].errors['minlength'] &&
+                 (loginForm.controls['password'].dirty)"
+          >Minimum number of characters {{ loginForm.get('password').errors['minlength'].requiredLength }}</small>
         </div>
       </div>
     </div>
   </div>
-  <div class="button-group">
-    <p-button label='Log In'
-              (onClick)="loginEmail()"
-              [disabled]="loginForm.invalid || submitted"
-    ></p-button>
+  <div class="button-group-wrap">
+    <div class="button-group">
+      <p-button label='Log In'
+                (onClick)="loginEmail()"
+                [disabled]="loginForm.invalid || submitted"
+      ></p-button>
+    </div>
+    <div class="button-group">
+      <p-button label='Log In with Google'
+                (onClick)="loginGoogle()"
+      ></p-button>
+    </div>
   </div>
-  <div class="button-group">
-    <p-button label='Log In with Google'
-              (onClick)="loginGoogle()"
-    ></p-button>
-  </div>
-
 </form>
