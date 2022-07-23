@@ -2,14 +2,14 @@
   <div class="error-message" *ngIf="auth.error$ | async as error">{{ error }}</div>
   <div class="form-control">
     <div class="label-wrap">
-      <label for="email">User Name</label>
+      <label for="userName">User Name</label>
     </div>
     <div class="item-input">
       <div class="item-input-content">
         <input id="userName"
                type="text"
                aria-describedby="name-help"
-               class=" p-inputtext-sm"
+               class="p-inputtext-sm"
                [class.ng-invalid]="signupForm.controls['name'].invalid"
                [class.ng-dirty]="signupForm.controls['name'].dirty"
                pInputText
@@ -18,7 +18,7 @@
           <small class="p-error block"
                  *ngIf="signupForm.controls['name'].errors['required'] &&
                  (signupForm.controls['name'].dirty || signupForm.controls['name'].touched)"
-          >Enter email</small>
+          >Enter user name</small>
           <small class="p-error block"
                  *ngIf="signupForm.controls['name'].errors['minlength'] &&
                  (signupForm.controls['name'].dirty)"
